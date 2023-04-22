@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}Магазин - Покупка скина{% endblock %}
+
+{% block content %}
+
+<h1 style="text-align: center">Покупка скина</h1>
+<div class="skin-container" style="text-align: center">
+    <div class="skin-image">
+        <img src="static/skins/skin1.png" width="500" height="500" alt="Скин">
+    </div>
+    <div class="skin-info">
+        <p>Обычный</p>
+        <p>Цена: $0</p>
+        {% if current_user.skin[0] == "1" %}
+        <form method="post">
+            <button type="submit" name="shopp" value="0" class="btn btn-primary btn-lg">Взять</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+<hr style="height: 7px; border: none; border-top: 1px solid #333; border-bottom: 1px solid #333;">
+
+<div class="skin-container" style="text-align: center">
+    <div class="skin-image">
+        <img src="static/skins/skin2.png" width="500" height="500" alt="Скин">
+    </div>
+    <div class="skin-info">
+        <p>Огненный</p>
+        <p>Цена: $200</p>
+        {% if current_user.skin[1] == "0" %}
+        <form method="post">
+            <button type="submit" name="shopp" value="1" class="btn btn-primary btn-lg">Купить</button>
+        </form>
+        {% elif current_user.skin[1] == "1" %}
+        <form method="post">
+            <button type="submit" name="shopp" value="10" class="btn btn-primary btn-lg">Взять</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+<hr style="height: 3px; border: none; border-top: 1px solid #333; border-bottom: 1px solid #333;">
+<div class="skin-container" style="text-align: center">
+    <div class="skin-image">
+        <img src="static/skins/skin3.png" width="500" height="500" alt="Скин">
+    </div>
+    <div class="skin-info">
+        <p>Водяной</p>
+        <p>Цена: $200</p>
+        {% if current_user.skin[2] == "0" %}
+        <form method="post">
+            <button type="submit" name="shopp" value="2" class="btn btn-primary btn-lg">Купить</button>
+        </form>
+        {% elif current_user.skin[2] == "1" %}
+        <form method="post">
+            <button type="submit" name="shopp" value="20" class="btn btn-primary btn-lg">Взять</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+<hr style="height: 7px; border: none; border-top: 1px solid #333; border-bottom: 1px solid #333;">
+<div class="skin-container" style="text-align: center">
+    <div class="skin-image">
+        <img src="static/skins/skin4.png" width="500" height="500" alt="Скин">
+    </div>
+    <div class="skin-info">
+        <p>Денежный</p>
+        <p>Цена: $500</p>
+        {% if current_user.skin[3] == "0" %}
+        <form method="post">
+            <button type="submit" name="shopp" value="3" class="btn btn-primary btn-lg">Купить</button>
+        </form>
+        {% elif current_user.skin[3] == "1" %}
+        <form method="post">
+            <button type="submit" name="shopp" value="30" class="btn btn-primary btn-lg">Взять</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+<hr style="height: 7px; border: none; border-top: 1px solid #333; border-bottom: 1px solid #333;">
+<div class="skin-container" style="text-align: center">
+    <div class="skin-image">
+        <img src="static/skins/skin5.png" width="500" height="500" alt="Скин">
+    </div>
+    <div class="skin-info">
+        <p>Король</p>
+        <p>Цена: $1000</p>
+        {% if current_user.skin[4] == "0" %}
+        <form method="post">
+            <button type="submit" name="shopp" value="4" class="btn btn-primary btn-lg">Купить</button>
+        </form>
+        {% elif current_user.skin[4] == "1" %}
+        <form method="post">
+            <button type="submit" name="shopp" value="40" class="btn btn-primary btn-lg">Взять</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
