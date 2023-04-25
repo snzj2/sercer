@@ -74,7 +74,7 @@ def Best():
         n.append([i.name, i.bestscore, i.money])
     res = sorted(n, reverse=True, key=lambda x: x[1])
     res1 = sorted(n, reverse=True, key=lambda x: x[2])
-    print(res, res1)
+
     return render_template('best.html', bestscore=res, money=res1, title='Лучшие результаты')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -147,23 +147,27 @@ def game():
 
 @app.route('/data1', methods=['POST'])
 def process_json():
-    data = request.get_json()
-    db_sess = db_session.create_session()
-    user = db_sess.query(User).filter(User.name == str(data["name"])).first()
 
-    if user:
-        user.money = data["money"]
-        user.bestscore = data["bestscore"]
-        db_sess.commit()
+    data = request.get_json()
+    if current_user.is_authenticated:
+        db_sess = db_session.create_session()
+        user = db_sess.query(User).filter(User.name == str(data["name"])).first()
+        if user:
+            user.money = data["money"]
+            user.bestscore = data["bestscore"]
+            db_sess.commit()
     return jsonify({'message': 'JSON received'})
 
 
 @app.route('/data')
 def data():
-    print(current_user.name, current_user.money, current_user.bestscore)
-    print(int(current_user.skin.find("2")))
-    data = {'name': current_user.name, 'money': current_user.money, 'bestscore': current_user.bestscore, 'skin': int(current_user.skin.find("2"))}
-    return jsonify(data)
+    if current_user.is_authenticated:
+        data = {'name': current_user.name, 'money': current_user.money, 'bestscore': current_user.bestscore, 'skin': int(current_user.skin.find("2"))}
+        return jsonify(data)
+    else:
+        data = {'name': "Анонимный", 'money': 0, 'bestscore': 0,
+                'skin': 0}
+        return jsonify(data)
 
 
 if __name__ == '__main__':
