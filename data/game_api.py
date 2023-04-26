@@ -24,6 +24,17 @@ def get_news():
     )
 
 
+@blueprint.route('/api/game/<int:game_id>', methods=['DELETE'])
+def delete_news(game_id):
+    db_sess = db_session.create_session()
+    user = db_sess.query(User).get(game_id)
+    if not user:
+        return flask.jsonify({'error': 'Not found'})
+    db_sess.delete(user)
+    db_sess.commit()
+    return flask.jsonify({'success': 'OK'})
+
+
 @blueprint.route('/api/game/<int:game_id>', methods=['GET'])
 def get_one_user(game_id):
     db_sess = db_session.create_session()
